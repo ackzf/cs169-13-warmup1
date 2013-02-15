@@ -1,1 +1,1 @@
-web: python manage.my server
+web: python manage.py server
