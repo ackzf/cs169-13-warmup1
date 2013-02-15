@@ -93,10 +93,7 @@ class UsersModel:
             if (login.username == user):                
                 return ERR_USER_EXISTS
         l = Login(len(self.users), user, password, 1)
-        l.save();
-        print self.users;
-        print [l]                                     
-        self.users += [l]        
+        l.save();      
         assert l.count == 1
         return l.count
 
