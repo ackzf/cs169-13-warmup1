@@ -47,10 +47,9 @@ class UsersModel:
     def __init__(self):
         # username -> UserData        
         self.users = Login.objects.all()
-        self.reset()
 
     # Used from constructor and self test
-    def reset(self):
+    def ESTAPI_resetFixture(self):
         # username -> UserData
         for login in self.users:
             login.delete();
@@ -94,7 +93,9 @@ class UsersModel:
             if (login.username == user):                
                 return ERR_USER_EXISTS
         l = Login(len(self.users), user, password, 1)
-        l.save();                                     
+        l.save();
+        print self.users;
+        print [l]                                     
         self.users += [l]        
         assert l.count == 1
         return l.count
