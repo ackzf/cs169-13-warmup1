@@ -49,7 +49,7 @@ class UsersModel:
         self.users = Login.objects.all()
 
     # Used from constructor and self test
-    def ESTAPI_resetFixture(self):
+    def reset(self):
         # username -> UserData
         for login in self.users:
             login.delete();
