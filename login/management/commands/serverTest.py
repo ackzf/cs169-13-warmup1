@@ -53,6 +53,12 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(server.SUCCESS, self.users.add("user1", "password"))
         self.assertEquals(2, self.users.login(self, "user1", "password"))
         
+    def testAddLoginCount(self):
+        self.users.reset()
+        self.assertEquals(server.SUCCESS, self.users.add("user1", "password"))
+        for i in range(2, 10)
+        self.assertEquals(i, self.users.login(self, "user1", "password"))
+        
     def testAddLongUser(self):
         self.users.reset()
         a = ""
@@ -71,7 +77,7 @@ class TestUsers(unittest.TestCase):
         aa = a + "aa"
         self.assertEquals(server.ERR_BAD_PASSWORD, self.users.add("user2", aa))
     
-    def testLongIser:
+    def testLongUser(self):
         self.users.reset()
         a = ""
         for i in range(0,127)
@@ -79,13 +85,22 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(server.SUCCESS, self.users.add(a, "pass"))
         self.assertEquals(2, self.users.login(self, a, "pass"))
     
-    def testLongPword:
+    def testLongPword(self):
         self.users.reset()
         a = ""
         for i in range(0,127)
             a += "a"
         self.assertEquals(server.SUCCESS, self.users.add("user1", a))
         self.assertEquals(2, self.users.login(self, "user1", a))
+        
+    def testReset(self):
+        self.users.reset()
+        self.assertEquals(server.SUCCESS, self.users.add("user1", "password"))
+        self.assertEquals(2, self.users.login(self, "user1", "password"))
+        self.TESTAPI_resetFixture(self)
+        self.assertEquals(server.ERR_BAD_CREDENTIALS, self.users.login(self, "user1", "password"))
+        self.assertEquals(server.SUCCESS, self.users.add("user1", "password"))
+        self.assertEquals(2, self.users.login(self, "user1", "password"))
         
 
 # If this file is invoked as a Python script, run the tests in this module
