@@ -14,10 +14,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^$/', index, name='index'),
+    url(r'^$/', include('login.urls')),
 )
-
-from django.http import HttpResponse
-
-def index(request):
-    return HttpResponse("<!DOCTYPE html><html><head><meta http-equiv='refresh' content='1; url=http://www.google.com/'/></head></body></html>")
