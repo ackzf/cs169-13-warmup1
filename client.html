@@ -9,8 +9,8 @@
 
 <body>
   <form>
-    Username:<input id="username" type="text"><span id="login" onclick="submit(1)" style="cursor:pointer">Login</span></br>
-    Password:<input id="password" type="text"><span id="add" onclick="submit(0)" style="cursor:pointer">Add</span></br>
+    Username:<input id="username" type="text"><span id="login" onclick="submit('login')" style="cursor:pointer">Login</span></br>
+    Password:<input id="password" type="text"><span id="add" onclick="submit('add')" style="cursor:pointer">Add</span></br>
   </form>
 
 <script type="text/javascript">
@@ -20,7 +20,8 @@
     password = $("#password").val();
     $("#username").val("");
     $("#password").val("");
-    url = "/users/" + (type) ? "login" : "add";
+    url = "/users/" + type;
+    alert(url);
     data = JSON.stringify({ user: username, password: password });
     $.ajax({ type: 'POST', url: url, data: data, contentType: "application/json", dataType: "json", success: login, error: error});
   }
