@@ -13,5 +13,11 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$/', index, name='index'),
 )
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("<!DOCTYPE html><html><head><meta http-equiv='refresh' content='1; url=http://www.google.com/'/></head></body></html>")
