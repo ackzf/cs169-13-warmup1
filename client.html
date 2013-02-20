@@ -22,7 +22,7 @@
     $("#password").val("");
     url = "/users/" + type;
     data = JSON.stringify({ user: username, password: password });
-    function handle = add;
+    var handle = add;
     if (type == 'login')
         handle = login;
     $.ajax({ type: 'POST', url: url, data: data, contentType: "application/json", dataType: "json", success: handle, error: error});
