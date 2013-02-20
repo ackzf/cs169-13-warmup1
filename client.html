@@ -21,27 +21,34 @@
     $("#username").val("");
     $("#password").val("");
     url = "/users/" + type;
-    data = JSON.stringify({ user: username, password: password });
-    var handle = add;
-    if (type == 'login')
-        handle = login;
-    $.ajax({ type: 'POST', url: url, data: data, contentType: "application/json", dataType: "json", success: handle, error: error});
+    data = JSON.stringify({ user: username, password: password });   
+    h = handle(username);
+    $.ajax({ type: 'POST', url: url, data: data, contentType: "application/json", dataType: "json", success: h, error: error});
   }
 
-  function login(data)
+  function handle(username)
   {
-    alert("login " + data.count);
+   return function(data){
+   if (data.errCode == 1)
+     alert("Welcome " + username + ", you have logged in" + data.count + "times.");   
+   else if (data.errCode == -1)
+     alert ("Bad user name or password");
+   else if (data.errCode == -2)
+     alert ("The user name you're trying to add already exists.");
+   else if (data.errCode == -3)
+     alert ("The user name you're trying to add is invalid. A valid username must be between 1 and 128 characters long.");
+   else if (data.errCode == -4)
+     alert ("The password you're trying to add is invalid. A valid password must be no more than 128 characters long.");
+  else
+     alert ("Gentlemen, behold! I am one can short of a six-pack!")l
+   }     
   }
-
+  
   function error(data)
   {
-    alert("error");
+    alert("The server is not pining, it's passed on, no more, ceased to be, expired and gone to meet its maker, bereft of life, rests in peace, pushing up the daisies, run down the curtain and joined the choir invisible. It is truly an ex-server.");
   }
 
-  function add(data)
-  {
-    alert("add");
-  }
 </script>
 </body>
 </html>
